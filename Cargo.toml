@@ -1,0 +1,14 @@
+[package]
+name = "redis-key"
+version = "0.1.0"
+edition = "2021"
+authors = ["Ovidiu Ionescu <ovidiu@ionescu.net>"] 
+description = "Set and get a value in Redis by key."
+license = "AGPL-3.0-or-later"
+repository = "https://github.com/ovidiu-ionescu/redis-key"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+redis = { version = "0.24.0", features = ["tls-rustls", "tls-rustls-insecure"] }
+
