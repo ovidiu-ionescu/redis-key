@@ -7,7 +7,7 @@ on:
         description: 'The version of the release'
         required: true
         type: string
-        default: '1.0.0'
+        default: '1.0.1'
       binary-name:
         description: 'The name of the binary'
         required: true

@@ -1,6 +1,6 @@
 [package]
 name = "redis-key"
-version = "0.1.0"
+version = "0.1.1"
 edition = "2021"
 authors = ["Ovidiu Ionescu <ovidiu@ionescu.net>"] 
 description = "Set and get a value in Redis by key."
@@ -11,4 +11,5 @@ repository = "https://github.com/ovidiu-ionescu/redis-key"
 
 [dependencies]
 redis = { version = "0.24.0", features = ["tls-rustls", "tls-rustls-insecure"] }
+zune-inflate = "0.2.54"
 

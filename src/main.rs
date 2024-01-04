@@ -1,6 +1,7 @@
 use redis::Commands;
 use std::io::{self, Write};
 use std::env;
+use zune_inflate::DeflateDecoder;
 
 fn main() -> Result<(), Box<dyn std::error::Error>> {
     let args: Vec<String> = env::args().collect();
@@ -35,7 +36,14 @@ fn read_key(con: &mut redis::Connection, key: &str) -> Result<Vec<u8>, Box<dyn s
     if x.is_empty() {
         return Err("Key not found".into());
     }
-    Ok(x)
+    //check if it is gzipped
+    if x[0] == 0x1f && x[1] == 0x8b {
+        let mut decoder = DeflateDecoder::new(&x[..]);
+        let decompressed_data = decoder.decode_gzip()?;
+        Ok(decompressed_data)
+    } else {
+        Ok(x)
+    }
 }
 
 fn write_key(con: &mut redis::Connection, key: &str, value: &[u8]) -> Result<(), Box<dyn std::error::Error>> {
