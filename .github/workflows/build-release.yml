@@ -19,6 +19,8 @@ on:
   
 jobs:
   create_release:
+    permissions:
+      contents: write
     runs-on: ubuntu-latest
     steps:
     - name: Checkout project
