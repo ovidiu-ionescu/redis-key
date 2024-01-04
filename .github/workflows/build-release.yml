@@ -18,8 +18,19 @@ on:
         required: true
   
 jobs:
+  create_release:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Create release
+      shell: bash
+      env:
+        GITHUB_TOKEN: ${{ github.token }}
+      run: |
+        gh release create ${{ inputs.release-version }}
+
   build_release:
     name: Build release
+    needs: create_release
     permissions:
       contents: write
     runs-on: ${{ matrix.os }}
@@ -70,12 +81,6 @@ jobs:
           tar czf "$archive_name" "${{ inputs.binary-name }}"
           echo "ASSET=$archive_name" >> $GITHUB_ENV
         fi
-    - name: Create release
-      shell: bash
-      env:
-        GITHUB_TOKEN: ${{ github.token }}
-      run: |
-        gh release create ${{ inputs.release-version }}
     - name: Upload release
       shell: bash
       env:
