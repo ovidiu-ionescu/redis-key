@@ -73,7 +73,7 @@ jobs:
     - name: Upload release
       shell: bash
       env:
-        GITHUB_TOKEN: ${{ secrets.token }}
+        GITHUB_TOKEN: ${{ github.token }}
       run: |
         gh release upload ${{ inputs.release-version }} ${{ env.ASSET }}
 
