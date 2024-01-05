@@ -41,6 +41,11 @@ fn read_key(con: &mut redis::Connection, key: &str) -> Result<Vec<u8>, Box<dyn s
         let mut decoder = DeflateDecoder::new(&x[..]);
         let decompressed_data = decoder.decode_gzip()?;
         Ok(decompressed_data)
+    // check if it is zlib
+    } else if x[0] == 0x78 && ((0x7800 as u16) | (x[1] as u16)) % 31 == 0 {
+        let mut decoder = DeflateDecoder::new(&x[..]);
+        let decompressed_data = decoder.decode_zlib()?;
+        Ok(decompressed_data)
     } else {
         Ok(x)
     }

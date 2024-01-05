@@ -1,6 +1,6 @@
 [package]
 name = "redis-key"
-version = "0.1.1"
+version = "1.0.2"
 edition = "2021"
 authors = ["Ovidiu Ionescu <ovidiu@ionescu.net>"] 
 description = "Set and get a value in Redis by key."
